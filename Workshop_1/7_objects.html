@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+var person = [ 
+    {
+        firstName:"John",
+        lastName:"Doe",
+        age:50,
+        eyeColor:"blue",
+        address: "Kukkatie 1",
+        telephone: "040123456"
+    },
+    {
+        firstName:"Joni",
+        lastName:"Maisema",
+        age:69,
+        eyeColor:"red",
+        address: "Rinkitie 12",
+        telephone: "040321654" 
+    },
+    {
+        firstName:"Kalle",
+        lastName:"Kokkonen",
+        age:18,
+        eyeColor:"hazel",
+        address: "Tikkatie 4",
+        telephone: "0409876545"
+    },
+    {
+        firstName:"Pellervo",
+        lastName:"Pallero",
+        age:26,
+        eyeColor:"Brown",
+        address: "Korvatunturi 1",
+        telephone: "0406544562"
+    }
+] //4 person array
+person.forEach(function(item) {
+    console.log(item.firstName + " " + item.lastName);
+}//function(item)
+);
+
+</script>
+</body>
+</html>
