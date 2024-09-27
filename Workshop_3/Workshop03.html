@@ -5,12 +5,15 @@
         <title>Workshop 3</title>
         <link rel="stylesheet" href="css/styles.css">
         <script>
+/* EXERCISE 1 */
+    /* button 1 */
             function ClickMe() {
-                let date = new Date();
+                let date = new Date(); /* haetaan date ja tallennetaan se muuttujaan */
                 alert("You clicked me! " + date);
             }
-            function showTable() {
-                let HTMLtable = `
+    /* button 2 */       
+            function showTable() { /* backtick eli ` mahdollistaa monirivisen "tulostuksen" */
+                let HTMLtable = ` 
                 <table id="example" class="display" border="1">
             <thead>
                 <tr>
@@ -49,43 +52,50 @@
         </table>
             `;
             document.write(HTMLtable);
-           }
+           } //function showTable()
+    /* button 3 */
         function getLocation() {
-            navigator.geolocation.getCurrentPosition(showPosition);
-            
+            navigator.geolocation.getCurrentPosition(showPosition);            
            } //function getLocation()
-        function showPosition(position) {
+        
+           function showPosition(position) {
             console.log(position) //testiprinttaus logiin
             let lat = position.coords.latitude; //Tallennetaan tiedot muuttujiin
             let lon = position.coords.longitude;
             document.write("Latitude: " + lat + " <br>Longitude: " + lon); //kirjoitan koordinaatit
             console.log("Latitude: " + lat + " Longitude: " + lon);
            } //function showPosition()
-           
+/* EXERCISE 2 */           
         function hover() {
             console.log("Stepped over my a mouse!")
 
         }//function hover()
-
+        /* tästä tulee hauskaa spämmiä consoleen kun heiluttaa hiirtä otsikon päällä :D */
         function mouseout() {
             console.log("Bye bye mouse!")
 
         }//function mouseout()
 
+/* EXERCISE 3 */        
         function properData() {
-            const element = document.getElementById("textdata");
-            element.style.backgroundColor = "#404040";
-            element.textContent = "Please fill in the form with proper data.";
+            const element = document.getElementById("textdata"); /* etsitään element "textdata" ja tallennetaan se muuttujaksi*/
+            element.style.backgroundColor = "#404040"; /* muutetaan elementin(textdata) taustan väri */
+            element.textContent = "Please fill in the form with proper data."; /* "tulostetaan" tekstiä laatikkoon */
         }
         let KeyPressCount = 0; //Määritellään näppäinlaskuri nollaan keyPresses() -funktiota varten
         function keyPresses() {
-            KeyPressCount++;
-            document.getElementById('form').textContent = `Key Presses: ${KeyPressCount}`
+            KeyPressCount++; /* laskee näppäiniskujen määrän, ehkä huonosti toteutettu koska laskee myös "tyhjät" lyönnit, esim backspace... */
+            document.getElementById('form').textContent = `Key Presses: ${KeyPressCount}` /* tulostetaan näppäinten iskut alle. Lisäsin HTML:ään p tägin, johon puskin tiedot. */
         }
 
-        function textCheck() {
-
-
+        function textCheck(event) {
+            var td = document.getElementById("textdata").value
+            console.log(td);
+            if (td === "") {
+                document.getElementById("form").textContent = ("You can't submit an empty form!");
+                return false;
+            }//if
+            return true;
         }
            <!-- JavaScript goes here -->
         </script>
@@ -162,10 +172,10 @@
           <li>Try to use onkeydown -event on the textarea. It should calculate the number of keypresses and output them on the screen. Could you think other smart ways to use it?</li>
           <li>When the form button is clicked, check if the textarea is empty. Notify the user with appropriate message. HINT: You can access the Textarea using the following command:   <i>document.getElementById("textdata").value</i>. We will study the forms deeper in Workshops 4 and 5.</li>
         </ul>
-        <form>
+        <form onsubmit="return textCheck()" >
             <textarea id="textdata" onfocus="properData()" onkeydown="keyPresses()"></textarea><br>
             <span id="charcount"></span>
-            <button onclick="textCheck()">Send me</button>
+            <button>Send me</button>
             <p id="form"></p>
         </form>
         <hr/>
