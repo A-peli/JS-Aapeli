@@ -7,12 +7,12 @@
         <script>
 /* EXERCISE 1 */
     /* button 1 */
-            function ClickMe() {
+            function ClickMe() { /* <button onclick="ClickMe()" >Click me</button> */
                 let date = new Date(); /* haetaan date ja tallennetaan se muuttujaan */
                 alert("You clicked me! " + date);
             }
     /* button 2 */       
-            function showTable() { /* backtick eli ` mahdollistaa monirivisen "tulostuksen" */
+            function showTable() { /* <button onclick="showTable()">Show table</button> ---backtick eli ` mahdollistaa monirivisen "tulostuksen" */
                 let HTMLtable = ` 
                 <table id="example" class="display" border="1">
             <thead>
@@ -54,7 +54,7 @@
             document.write(HTMLtable);
            } //function showTable()
     /* button 3 */
-        function getLocation() {
+        function getLocation() { /* <button onclick="getLocation()">Geolocation</button> */
             navigator.geolocation.getCurrentPosition(showPosition);            
            } //function getLocation()
         
@@ -66,37 +66,46 @@
             console.log("Latitude: " + lat + " Longitude: " + lon);
            } //function showPosition()
 /* EXERCISE 2 */           
-        function hover() {
+        function hover() {/* <h2 onMouseOver="hover()" onMouseOut="mouseout()">Exercise 2</h2> */
             console.log("Stepped over my a mouse!")
 
         }//function hover()
-        /* tästä tulee hauskaa spämmiä consoleen kun heiluttaa hiirtä otsikon päällä :D */
-        function mouseout() {
+        function mouseLeave() { /* <h2 onMouseOver="hover()" onMouseLeave="mouseout()">Exercise 2</h2> */
             console.log("Bye bye mouse!")
-
-        }//function mouseout()
+            /* alert("Bye bye mouse!") */  /* Poistettu käytöstä työskentelyn ajaksi!! */
+        }//function mouseLeave()
 
 /* EXERCISE 3 */        
-        function properData() {
+        function properData() { /* <textarea id="textdata" onfocus="properData()" onkeydown="keyPresses()"></textarea> */
             const element = document.getElementById("textdata"); /* etsitään element "textdata" ja tallennetaan se muuttujaksi*/
             element.style.backgroundColor = "#404040"; /* muutetaan elementin(textdata) taustan väri */
             element.textContent = "Please fill in the form with proper data."; /* "tulostetaan" tekstiä laatikkoon */
         }
         let KeyPressCount = 0; //Määritellään näppäinlaskuri nollaan keyPresses() -funktiota varten
-        function keyPresses() {
+        function keyPresses() { /* <textarea id="textdata" onfocus="properData()" onkeydown="keyPresses()"></textarea> */
             KeyPressCount++; /* laskee näppäiniskujen määrän, ehkä huonosti toteutettu koska laskee myös "tyhjät" lyönnit, esim backspace... */
             document.getElementById('form').textContent = `Key Presses: ${KeyPressCount}` /* tulostetaan näppäinten iskut alle. Lisäsin HTML:ään p tägin, johon puskin tiedot. */
         }
 
-        function textCheck(event) {
-            var td = document.getElementById("textdata").value
+        function textCheck(event) { /* <form onsubmit="return textCheck()" > */
+            var td = document.getElementById("textdata").value //Tallennetaan kentän teksti muuttujaan 
             console.log(td);
-            if (td === "") {
-                document.getElementById("form").textContent = ("You can't submit an empty form!");
+            if (td === "") { /* Tarkistetaan onko tekstikenttä (muuttuja) tyhjä */
+                document.getElementById("form").textContent = ("You can't submit an empty form!"); /* tulostetaan error */
                 return false;
             }//if
-            return true;
+            return true; /* jos kenttä ei ole tyhjä, niin submit ok (sivu päivittyy) (formissa onsubmit -event)*/
         }
+
+/* EXERCISE 4 */    
+        function showCoords() { /* <div id="coordinates" onmousemove = "showCoords()" ></div> */
+            let x = event.clientX; /* Haetaan koordinaatit ja tallennetaan ne muuttujiksi */
+            let y = event.clientY;
+            console.log("X: " + x + " Y: " + y);
+            document.getElementById("coordinates").textContent = "X: " + x + " Y: " + y; /* innerHTML:n sijaan käytän .textContent */
+        }
+
+
            <!-- JavaScript goes here -->
         </script>
     </head>
@@ -158,7 +167,7 @@
             <li>The last button should check Geolocation of the user, and output it to the console and to the page. Note: Some browsers might not allow you to do this. Try different browsers if you get errors.</li>
         </ol>
         <hr/>
-        <h2 onMouseOver="hover()" onMouseOut="mouseout()">Exercise 2</h2> <!-- onMouseOver ja onMouseOut funktiot ajetaan kun hoverataan tai poistutaan otsikon päältä -->
+        <h2 onMouseOver="hover()" onMouseLeave="mouseLeave()">Exercise 2</h2> <!-- onMouseOver ja onMouseLeave funktiot ajetaan kun hoverataan tai poistutaan otsikon päältä -->
         <ul>
             <li>Add an&nbsp;onMouseOver event on the&nbsp;Heading "Exercise 2" of this page.&nbsp;It should&nbsp;fire when the users mouse is moved 
         over&nbsp;it. Output "Stepped over my a mouse!" on the console.</li>
@@ -180,7 +189,7 @@
         </form>
         <hr/>
         <h2>Exercise 4</h2>
-        <div id="coordinates"></div>
+        <div id="coordinates" onmousemove = "showCoords()" ></div>
         <p>Add onMouseMove -event to the DIV-element above. When you move mouse over the DIV (rectangle) the program should output the coordinates of your pointer. Try first outputting to the console using console.log.</p>
         <p> When the program is working, you can try outputting the text on the H2 element with an id "coords" the box</p> 
         <p>HINT: You need to use document.getElementById("coordinates").innerHTML to achieve this.</p>
