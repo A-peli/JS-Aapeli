@@ -4,6 +4,67 @@
 		<title>Workshop 4</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/styles.css">
+
+		<script>
+/* EXCERCISE 1 */			
+				/* button 1 */		
+			function changeHeading() {
+				document.querySelector('h1').textContent = "Modified Heading!";
+			} //fucntion changeHeading()
+				/* button 2 */		
+			function modifyHeading() {
+				let otsikot = document.querySelectorAll('h2'); //valitaan sivulta kaikki h2 tägit
+				let otsikko = otsikot[1]; //tallennetaan indexissä 1 (eli toisena) oleva otsikko muuttujaan
+				otsikko.style.fontSize = '60px';  //muutetaan otsikkoa
+				otsikko.style.color = 'brown';
+				otsikko.style.fontStyle = 'italic'; 
+				otsikko.style.backgroundColor = 'beige'; 
+			} //function modifyHeading()
+				/* button 3 */		
+			function lorem() { //functiolla lisätään valittu tekstin pätkä sivulle haluttuun paikkaan
+				let paragraphs = document.querySelectorAll('p');  // haetaan p tägit ja tallennetaan ne muuttujaan arrayksi
+				let uusiP = document.createElement('p'); // määritellään uusi (tyhjä) p tägi muuttujaan
+				uusiP.innerHTML = '<strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em><br><br>'; //lisätään haluttu teksti uuteen p tägiin
+				paragraphs[3].append(uusiP); //sijoitetaan uusi p tägi indexissä 3 (eli neljäntenä) olevan p tägin jälkeen (append sijoittaa defaulttina määäritellyn JÄLKEEN)
+				let kuva = document.createElement('img'); // luodaan tyhjä kuva elementti
+				kuva.src = "https://placehold.co/200"; //määritellään tyhjän kuvaelementin sisältö: placeholderkuva 200x200px
+				uusiP.append(kuva); //sijoitetaan kuvatägi tekstin jälkeen (append sijoittaa oletuksena määrittelyn jälkeen)
+				}//function lorem()
+			
+/* EXERCISE 2 */
+
+
+
+			function hide() {  
+   				document.getElementById('me').style.display = 'none';  //etsii elementit id:llä 'me' ja piilottaa ne
+			}//hide()
+
+/* NÄMÄ EIVÄT TOIMI, KOSKA style.css tiedostoa ei ole annettu!! (kurssin githubissa) */
+
+			function show() {  
+				document.getElementById('me').style.display = 'block';  //palauttaa elementit näkyviin
+			}//show()
+
+			function surprise() {  // muutetaan jokaisen elementin, jolla class="surprise", fonttikokoa forEach -nuolifunktion avulla.
+    			let elements = document.querySelectorAll('.surprise');  // valitaan elementit joilla class="surprise" pisteellä haetaan classeja
+    			elements.forEach((element) => {  //nuolifunktiolla(forEach) syötetään elementit yksitellen alla olevan koodin läpi
+    				element.style.fontSize = '20px';  // Asettaa fonttikooksi 20px
+    				}); /* nuolifunktion loppu */
+			}//surprise()
+			
+			
+/* EXERCISE 3 */
+			function selectionAlert() {
+				let valinta = document.getElementById("mySelect").value
+				console.log(valinta)
+				alert("Oletko varma, että haluat valita automerkiksi " + valinta + "?")
+			}
+
+
+
+
+			
+		</script>
 	</head>
 	<body class="ws4">
 		<h1>Workshop 4: DOM Scripting</h1>
@@ -14,9 +75,9 @@
 		<h2>Exercise 1: Basic  DOM Manipulation</h2>
 		<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
 		<p>
-		  <button onclick="changeHeading();">Button 1</button>
-		  <button onclick="secondButton">Button 2</button>
-		  <button onclick="">Button 3</button>
+			<button onclick="changeHeading()">Button 1</button>
+			<button onclick="modifyHeading()">Button 2</button>
+			<button onclick="lorem()">Button 3</button>
 		</p>
 
 		<ul>
@@ -41,7 +102,7 @@
 			</label>
 			<br>
 			<label>
-				<input type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
+				<input onchange="surprise()" type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
 				<span id="surpise">Surprise</span>
 			</label>
 		</p>
@@ -60,7 +121,7 @@
 				<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
 			</ul>
 		  <p>Select a new car from the list.</p>
-		  <select name="mySelect" id="mySelect" onchange="">
+		  <select name="mySelect" id="mySelect" onchange="selectionAlert()">
 			<option value="BMW">BMW         
 			<option value="Audi">Audi
 			<option value="Mercedes">Mercedes
@@ -68,7 +129,7 @@
 		  </select>
 		  <br>
 		  <br>
-		<img alt="" onmouseover="" onmouseout="" style="left: 0px; opacity: 1;" src="http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg" width="400" id="carimage"/>
+		<img alt="" onmouseover="" onmouseout="" style="left: 0px; opacity: 1;" src="/Workshop_4/WS04_DOM_scripting/bmw.jpg" width="400" id="carimage"/>
 		<hr/>
 		<h2>Exercise 4: Moving things around</h2>
 		<ul>
