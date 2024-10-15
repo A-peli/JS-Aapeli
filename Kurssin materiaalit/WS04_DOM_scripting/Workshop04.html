@@ -4,6 +4,36 @@
 		<title>Workshop 4</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/styles.css">
+
+		<script>
+/* EXCERCISE 1 */			
+	/* button 1 */		
+			function changeHeading() {
+				document.querySelector('h1').textContent = "Modified Heading!";
+			}
+	/* button 2 */		
+			function modifyHeading() {
+				let otsikot = document.querySelectorAll('h2'); //valitsee kaikki h2 sivulta
+    			let otsikko = otsikot[1];
+				otsikko.style.fontSize = '45px';  //muuttaa toisen h2:n fonttikoon
+    			otsikko.style.color = 'green'; //muuttaa toisen h2:n txtin värin
+   				otsikko.style.fontStyle = 'italic'; //muuttaa toisen h2:n tekstistä kursivoidun
+    			otsikko.style.backgroundColor = 'pink'; //muuttaa toisen h2:n taustavärin pinkiksi
+			}
+	/* button 3 */		
+			function lorem() {
+
+			}
+
+/* EXERCISE 2 */
+
+
+
+/* EXERCISE 3 */
+
+
+		</script>
+
 	</head>
 	<body class="ws4">
 		<h1>Workshop 4: DOM Scripting</h1>
@@ -14,9 +44,9 @@
 		<h2>Exercise 1: Basic  DOM Manipulation</h2>
 		<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
 		<p>
-		  <button onclick="changeHeading();">Button 1</button>
-		  <button onclick="secondButton">Button 2</button>
-		  <button onclick="">Button 3</button>
+		  <button onclick="changeHeading()">Button 1</button>
+		  <button onclick="modifyHeading()">Button 2</button>
+		  <button onclick="lorem()">Button 3</button>
 		</p>
 
 		<ul>

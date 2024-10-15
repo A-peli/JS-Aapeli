@@ -3,45 +3,138 @@
 	<head>
 		<title>Workshop 4</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="styles.css">
+
 		<script>
-/* EXERCISE 1 */
-			function changeHeading() { //Muokataan h1 otsikkoa
-				let h1 = document.querySelector("h1"); //etsitään (ensimmäinen) h1 tag 
-					h1.textContent =  "Modified Heading!" //muutetaan sisältö
-			} //changeHeading() 
-			function secondButton() { //Muokataan toista h2 otsikkoa
-				let h2 = document.querySelectorAll("h2"); //haetaan (kaikki) h2 tägit
-					h2[1].style.fontSize = "3rem"; //Muutetaan indeksi 1:ssä (toka) h2:en fonttikoko.
-					h2[1].style.backgroundColor = "coral"; //...bg color...
-					h2[1].style.fontFamily = "cursive"; //...ja fontti
+/* EXCERCISE 1 */			
+				/* button 1 */		
+			function changeHeading() {
+				document.querySelector('h1').textContent = "Modified Heading!";
+			} //fucntion changeHeading()
+				/* button 2 */		
+			function modifyHeading() {
+				let otsikot = document.querySelectorAll('h2'); //valitaan sivulta kaikki h2 tägit
+				let otsikko = otsikot[1]; //tallennetaan indexissä 1 (eli toisena) oleva otsikko muuttujaan
+				otsikko.style.fontSize = '60px';  //muutetaan otsikkoa
+				otsikko.style.color = 'brown';
+				otsikko.style.fontStyle = 'italic'; 
+				otsikko.style.backgroundColor = 'beige'; 
+			} //function modifyHeading()
+				/* button 3 */		
+			function lorem() { //functiolla lisätään valittu tekstin pätkä sivulle haluttuun paikkaan
+				let paragraphs = document.querySelectorAll('p');  // haetaan p tägit ja tallennetaan ne muuttujaan arrayksi
+				let uusiP = document.createElement('p'); // määritellään uusi (tyhjä) p tägi muuttujaan
+				uusiP.innerHTML = '<strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em><br><br>'; //lisätään haluttu teksti uuteen p tägiin
+				paragraphs[3].append(uusiP); //sijoitetaan uusi p tägi indexissä 3 (eli neljäntenä) olevan p tägin jälkeen (append sijoittaa defaulttina määäritellyn JÄLKEEN)
+				let kuva = document.createElement('img'); // luodaan tyhjä kuva elementti
+				kuva.src = "https://placehold.co/200"; //määritellään tyhjän kuvaelementin sisältö: placeholderkuva 200x200px
+				uusiP.append(kuva); //sijoitetaan kuvatägi tekstin jälkeen (append sijoittaa oletuksena määrittelyn jälkeen)
+				}//function lorem()
+			
+/* EXERCISE 2 */
+			function hide() {  
+   				document.getElementById('me').style.display = 'none';  //etsii elementit id:llä 'me' ja piilottaa ne
+			}//hide()
+
+/* NÄMÄ EIVÄT TOIMI, KOSKA style.css tiedostoa ei ole annettu!! (kurssin githubissa) */
+
+			function show() {  
+				document.getElementById('me').style.display = 'block';  //palauttaa elementit näkyviin
+			}//show()
+
+			function surprise() {  // muutetaan jokaisen elementin, jolla class="surprise", fonttikokoa forEach -nuolifunktion avulla.
+    			let elements = document.querySelectorAll('.surprise');  // valitaan elementit joilla class="surprise" pisteellä haetaan classeja
+    			elements.forEach((element) => {  //nuolifunktiolla(forEach) syötetään elementit yksitellen alla olevan koodin läpi
+    				element.style.fontSize = '20px';  // Asettaa fonttikooksi 20px
+    				}); /* nuolifunktion loppu */
+			}//surprise()
+/* EXERCISE 3 */
+			function selection() { //funktio lähettää käyttäjälle alertin, jossa varmistetaan valinta, lisäksi näytetään kuva valitusta autosta.
+				let valinta = document.getElementById("mySelect").value;
+				alert("Oletko varma, että haluat valita automerkiksi " + valinta + "?");
+				let autokuva = document.getElementById("carimage");
+				if (valinta === "BMW") {
+					autokuva.src = "bmw.jpg";
+				}
+				if (valinta === "Mercedes") {
+					autokuva.src = "mersu.jpg";
+				}
+				if (valinta === "Volvo") {
+					autokuva.src = "volvo.jpg";
+				}
+				if (valinta === "Audi") {
+					autokuva.src = "audi.jpg";
+				}
 			}
-			function thirdButton() { // Lisää neljännen <p> tägin jälkeen tekstiä ja kuvan, muuttaa taustan värin
-				const paragraphs = document.querySelectorAll('p'); //haetaan <p> tägit ja lisätään ne muuttujaan
-				const newP = document.createElement('p'); //luodaan uusi element <p>
-				const teksti = '<strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em><br>'; //määritellään teksti
-				newP.innerHTML = teksti; //sijoitetaan teksti <p> tägiin
-				paragraphs[3].append(newP); // lisätään teksti 4. <p>:n jälkeen
-				const logoimg = document.createElement('img'); //luodaan uusi "tyhjä" kuva
-				logoimg.src = "https://via.placeholder.com/150"; //valitaan kuva
-				newP.append(logoimg);  //sijoitetaan kuva tekstin jälkeen
-				document.body.style.backgroundColor = "#CBC3E3" //muutetaan sivun taustakuva
+			function addBorder() { //lisätään kuvalle värillinen reunus, kun hiiri on sen päällä
+    			let kuvakehys = "5px solid orange";  // Tallennetaan borderin arvot muuttujaan
+    			document.getElementById("carimage").style.border = kuvakehys;  // Asetetaan kuvalle muuttujalla määritelty border
 			}
-/* EXERCISE 2  CSS -TIEDOSTO PUUTTUU, JOTEN NÄMÄ EI TOIMI KUTEN PITÄISI!!*/
-			function hide() {
-				const me = document.getElementById("me")
-				me.displayValue = "none"
+
+			function removeBorder() { //poistetaan värillinen reunus, kun hiiri poistetaan sen päältä
+				let kuva = document.getElementById("carimage");
+    			kuva.style.border = "";  // muutetaan border "tyhjäksi"
 			}
-			function show() {
-				/* JÄTÄN VÄLIIN, KOSKA CSS TIEDOSTO PUUTTUU */
+/* EXERCISE 4 */
+			function moveCarImage() {
+				let kuva = document.getElementById("carimage");  // Hakee elementin id:n perusteella
+				kuva.style.position = "relative";  // Asetetaan position suhteelliseksi
+				kuva.style.left = "200px";  // Siirretään 200 pikseliä vasemmalle
+				kuva.style.top = "500px";   // Siirretään 500 pikseliä alas
 			}
-			function surprise() { //Muuttaa surprise class:n omaavien elementtien fonttikoon
-				let surprise = document.getElementsByClassName("surprise") //valitaan kaikki "surprise" class itemit
-				console.log(surprise); //Tulostetaan konsoliin (testaamismielessä)
-				for (let i = 0; i < surprise.length; i++) {
-					surprise[i].style.fontSize = "20px"; //muutetaan silmukalla jokaisen surprise class fonttikoko 20px kokoiseksi.
-				} //for
-			} //surprise()
+			let sijainti = 0;
+			let suunta = 1; // 1 = oikealle, -1 = vasemmalle
+			function doMove() { //funktio ajetaan intervallin sisällä
+				let kuva = document.getElementById("carimage"); //haetaan kuva
+				sijainti += 10 * suunta; //lisätään nykyiseen sijaintiin 10px (tai jos suunta -1 eli vasemmalle, niin sitten miinustetaan sijainnista 10px)
+
+				if(sijainti >= window.innerWidth - kuva.offsetWidth || sijainti <= 0) { /* ikkunan leveys - kuvan leveys = kuvan oikea reuna on ikkunan reunassa */
+					suunta *= -1; //vaihdetaan suuntaa, jos saavutetaan jompikumpi reuna
+				}
+				kuva.style.left = sijainti + "px"; //asetetaan kuvalle sijainti
+			}
+			let opacity = 1.0
+			function fadeOut() {
+				let kuva = document.getElementById("carimage"); 
+				if (opacity > 0) {
+        			opacity -= 0.1; // Vähennetään opasiteettia
+       				kuva.style.opacity = opacity; // Asetetaan uusi opasiteetti
+    			}
+			}
+
+			function remove() {
+				let kuva = document.getElementById("carimage"); //haetaan kuva
+				kuva.remove();
+			}
+
+/* EXERCISE 5 */
+/* oisko näin?
+luo rivi
+luo solut
+lisää solut riviin
+syötä tiedot soluihin
+*/	
+			function insertRows() {
+				//otetaan käyttäjän syöttämät tiedot ja tallennetaan ne muuttujiin
+				const name = document.getElementById("textfield").value;
+				const position = document.getElementById("textfield2").value;
+				const salary = document.getElementById("textfield3").value;
+
+				//luodaan uusi rivi tableen
+				const table = document.getElementById("data");
+				const newRow = table.insertRow();
+
+				//luodaan tyhjät solut ja syötetään ne riviin
+				const cell1 = newRow.insertCell(0);
+				const cell2 = newRow.insertCell(1);
+				const cell3 = newRow.insertCell(2);
+
+				//lisätään soluihin käyttäjän syöttämät tiedot
+				cell1.textContent = name;
+				cell2.textContent = position;
+				cell3.textContent = salary;
+
+			}
 
 		</script>
 	</head>
@@ -54,9 +147,9 @@
 		<h2>Exercise 1: Basic  DOM Manipulation</h2>
 		<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
 		<p>
-		  <button onclick="changeHeading()">Button 1</button>
-		  <button onclick="secondButton()">Button 2</button>
-		  <button onclick="thirdButton()">Button 3</button>
+			<button onclick="changeHeading()">Button 1</button>
+			<button onclick="modifyHeading()">Button 2</button>
+			<button onclick="lorem()">Button 3</button>
 		</p>
 
 		<ul>
@@ -100,7 +193,7 @@
 				<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
 			</ul>
 		  <p>Select a new car from the list.</p>
-		  <select name="mySelect" id="mySelect" onchange="">
+		  <select name="mySelect" id="mySelect" onchange="selection()">
 			<option value="BMW">BMW         
 			<option value="Audi">Audi
 			<option value="Mercedes">Mercedes
@@ -108,15 +201,15 @@
 		  </select>
 		  <br>
 		  <br>
-		<img alt="" onmouseover="" onmouseout="" style="left: 0px; opacity: 1;" src="http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg" width="400" id="carimage"/>
+		<img alt="" onmouseover="addBorder()" onmouseout="removeBorder()" style="position: relative; left: 0px; opacity: 1;" src="bmw.jpg" width="400" id="carimage"/>
 		<hr/>
 		<h2>Exercise 4: Moving things around</h2>
 		<ul>
 		  <li>
 			<p class="surprise">You can do neat things by editing CSS-rules via  JavaScript. See the examples in lecture slides. Then try these:</p>
 			<ol>
-			  <li><button onclick="changePosition()">Move!</button>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
-			  <li><button onclick="setInterval(function(){doMove();},1000); ">Animate</button> Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
+			  <li><button onclick="moveCarImage()">Move!</button>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
+			  <li><button onclick="setInterval(function(){doMove();},100); ">Animate</button> Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
 			  <li><button onclick="setInterval(function(){fadeOut();},250);">Fade out!</button> Wite  a function fadeOut() which will slowly decrease the opacity of the image from 1.0 to  0 making it fade out. The Interval required has already been added to the onclick -event of the list item</li>
 			  <li><button onclick="remove()">Disappear! </button>Finally, write JavaScript which will remove the image from the page</li>
 			</ol>
