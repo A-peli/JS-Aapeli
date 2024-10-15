@@ -4,6 +4,46 @@
 		<title>Workshop 4</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/styles.css">
+		<script>
+/* EXERCISE 1 */
+			function changeHeading() { //Muokataan h1 otsikkoa
+				let h1 = document.querySelector("h1"); //etsitään (ensimmäinen) h1 tag 
+					h1.textContent =  "Modified Heading!" //muutetaan sisältö
+			} //changeHeading() 
+			function secondButton() { //Muokataan toista h2 otsikkoa
+				let h2 = document.querySelectorAll("h2"); //haetaan (kaikki) h2 tägit
+					h2[1].style.fontSize = "3rem"; //Muutetaan indeksi 1:ssä (toka) h2:en fonttikoko.
+					h2[1].style.backgroundColor = "coral"; //...bg color...
+					h2[1].style.fontFamily = "cursive"; //...ja fontti
+			}
+			function thirdButton() { // Lisää neljännen <p> tägin jälkeen tekstiä ja kuvan, muuttaa taustan värin
+				const paragraphs = document.querySelectorAll('p'); //haetaan <p> tägit ja lisätään ne muuttujaan
+				const newP = document.createElement('p'); //luodaan uusi element <p>
+				const teksti = '<strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em><br>'; //määritellään teksti
+				newP.innerHTML = teksti; //sijoitetaan teksti <p> tägiin
+				paragraphs[3].append(newP); // lisätään teksti 4. <p>:n jälkeen
+				const logoimg = document.createElement('img'); //luodaan uusi "tyhjä" kuva
+				logoimg.src = "https://via.placeholder.com/150"; //valitaan kuva
+				newP.append(logoimg);  //sijoitetaan kuva tekstin jälkeen
+				document.body.style.backgroundColor = "#CBC3E3" //muutetaan sivun taustakuva
+			}
+/* EXERCISE 2  CSS -TIEDOSTO PUUTTUU, JOTEN NÄMÄ EI TOIMI KUTEN PITÄISI!!*/
+			function hide() {
+				const me = document.getElementById("me")
+				me.displayValue = "none"
+			}
+			function show() {
+				/* JÄTÄN VÄLIIN, KOSKA CSS TIEDOSTO PUUTTUU */
+			}
+			function surprise() { //Muuttaa surprise class:n omaavien elementtien fonttikoon
+				let surprise = document.getElementsByClassName("surprise") //valitaan kaikki "surprise" class itemit
+				console.log(surprise); //Tulostetaan konsoliin (testaamismielessä)
+				for (let i = 0; i < surprise.length; i++) {
+					surprise[i].style.fontSize = "20px"; //muutetaan silmukalla jokaisen surprise class fonttikoko 20px kokoiseksi.
+				} //for
+			} //surprise()
+
+		</script>
 	</head>
 	<body class="ws4">
 		<h1>Workshop 4: DOM Scripting</h1>
@@ -14,9 +54,9 @@
 		<h2>Exercise 1: Basic  DOM Manipulation</h2>
 		<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
 		<p>
-		  <button onclick="changeHeading();">Button 1</button>
-		  <button onclick="secondButton">Button 2</button>
-		  <button onclick="">Button 3</button>
+		  <button onclick="changeHeading()">Button 1</button>
+		  <button onclick="secondButton()">Button 2</button>
+		  <button onclick="thirdButton()">Button 3</button>
 		</p>
 
 		<ul>
@@ -41,7 +81,7 @@
 			</label>
 			<br>
 			<label>
-				<input type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
+				<input onchange="surprise()" type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
 				<span id="surpise">Surprise</span>
 			</label>
 		</p>
